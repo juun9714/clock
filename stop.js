@@ -11,10 +11,11 @@
 // reset 버튼을 누르면 화면에 00:00을 띄우고 timelap 변수도 0으로 초기화 해주기.
 
 let timelap=0;
-const stbuttn=document.querySelector('#start');
-const rstbuttn=document.querySelector('#reset');
+const startbtn=document.querySelector('#start');
+const rstbtn=document.querySelector('#reset');
+
 let stopfunc=function(){
-    timelap++;
+    timelap=timelap+1;
     let minute=Math.floor(timelap/60);
     let second=timelap%60;
     if(minute<10) minute='0'+minute;
@@ -25,14 +26,20 @@ let stopfunc=function(){
     timeshow.textContent=timenow;
 }
 let a;
-stbuttn.onclick=function(){
+startbtn.onclick = function(){
+
     let cur=document.querySelector('#start').textContent;
     if(cur==='start'){
-        cur='stop';
+        document.querySelector('#start').textContent='stop';
         a=setInterval(stopfunc,1000);
-    }
-    else{
-        cur='start';
+    }else{
+        document.querySelector('#start').textContent='start';
         clearInterval(a);
     }
+}
+
+rstbtn.onclick=function(){
+    timelap=0;
+    let timeshow=document.querySelector('#stopwatch h1');
+    timeshow.textContent='00:00';
 }
